@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        background-image: url(image/image.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      textarea {
+        width: 900px;
+        height: 500px;
+        background: #FFDEAD;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="head">
+      <div id="sm-el">
+        <textarea rows="22" id="dataentry"></textarea>
+        <button id="btn" onclick="savetext()">Next Page</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    const Data = document.getElementById("dataentry");
+    const Btn = document.getElementById("btn");
+    
+
+    function savetext() {
+      const getData = Data.value;
+      localStorage.setItem("collect", getData);
+      window.location.href = "next-page";
+    }
+    
+  </script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .open {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="open">
+    <input placeholder="passoward" class="js-pass" onkeydown="">
+
+    <button onclick="display();">Open Diary</button>
+  </div>
+  
+  <p class="js-message"></p>
+
+  <script>
+    function display() {
+      const inputElement = document.querySelector('.js-pass');
+      value = document.innerHTML = `${inputElement.value}`;
+
+      if (value === '4776') {
+        console.log('This passoward is correct');
+      } else {
+        console.log('Passoward is incorrect');
+      }
+    }   
+  </script>
+</body>
+</html>

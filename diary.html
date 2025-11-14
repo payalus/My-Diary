@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #header {
+        width: 100vw;
+        height: 100vh;
+        background-image: url(image/image.webp);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+     button {
+      font-size: 12px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: solid;
+      margin-left: 50px;
+     }
+    
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div id="fdiv">
+        <div class="grid">
+          <textarea id="data">Date</textarea>
+        </div>
+      </div>
+      <button id="d-write" onclick="opendiary()">WRITE</button>
+      <button id="d-read" onclick="Opendiary()">READ</button>
+    </div>
+  </body>
+  <script>
+    const Dwrite = document.getElementById("d-write");
+    const Dread = document.getElementById("d-read");
+
+    Dwrite.addEventListener('click', function() {
+      window.location.href = "write.html";
+    })
+    Dread.addEventListener('click', function() {
+      window.location.href = 'Read.html';
+    })
+
+
+  </script>
+</html>

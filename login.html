@@ -1,0 +1,101 @@
+<!-- HTML -->
+<div id="login">
+  Enter password: <input type="password" id="passwordInput" />
+  <button onclick="unlockDiary()">Unlock Diary</button>
+</div>
+
+<div id="diary" style="display:none;">
+  <textarea id="diaryContent" rows="10" cols="30"></textarea>
+  <button onclick="saveDiary()">Save Diary</button>
+</div>
+
+
+
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+  function encryptDiary(text, password) {
+  return CryptoJS.AES.encrypt(text, password).toString();
+  }
+
+  function decryptDiary(ciphertext, password) {
+    try {
+      const bytes = CryptoJS.AES.decrypt(ciphertext, password);
+      return bytes.toString(CryptoJS.enc.Utf8);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function unlockDiary() {
+    const password = document.getElementById('passwordInput').value;
+    const encryptedData = localStorage.getItem('diaryData');
+    
+    if (!encryptedData) {
+      // No existing diary, show empty diary for new entry
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('diary').style.display = 'block';
+      return;
+    }
+
+    const decrypted = decryptDiary(encryptedData, password);
+    if (decrypted) {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('diary').style.display = 'block';
+      document.getElementById('diaryContent').value = decrypted;
+    } else {
+      alert('Wrong password or corrupted diary.');
+    }
+  }
+
+  function saveDiary() {
+    const password = document.getElementById('passwordInput').value;
+    const text = document.getElementById('diaryContent').value;
+    const encrypted = encryptDiary(text, password);
+    localStorage.setItem('diaryData', encrypted);
+    alert('Diary saved securely');
+  }
+
+</script>
+<!-- function encryptDiary(text, password) {
+  return CryptoJS.AES.encrypt(text, password).toString();
+}
+
+function decryptDiary(ciphertext, password) {
+  try {
+    const bytes = CryptoJS.AES.decrypt(ciphertext, password);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  } catch (e) {
+    return null;
+  }
+}
+
+function unlockDiary() {
+  const password = document.getElementById('passwordInput').value;
+  const encryptedData = localStorage.getItem('diaryData');
+  
+  if (!encryptedData) {
+    // No existing diary, show empty diary for new entry
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('diary').style.display = 'block';
+    return;
+  }
+
+  const decrypted = decryptDiary(encryptedData, password);
+  if (decrypted) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('diary').style.display = 'block';
+    document.getElementById('diaryContent').value = decrypted;
+  } else {
+    alert('Wrong password or corrupted diary.');
+  }
+}
+
+function saveDiary() {
+  const password = document.getElementById('passwordInput').value;
+  const text = document.getElementById('diaryContent').value;
+  const encrypted = encryptDiary(text, password);
+  localStorage.setItem('diaryData', encrypted);
+  alert('Diary saved securely');
+} -->
